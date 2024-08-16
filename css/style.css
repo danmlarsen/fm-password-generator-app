@@ -183,6 +183,9 @@ label {
 .password-generator__password {
   font-size: 3.2rem;
 }
+.password-generator__password--long {
+  font-size: 2.4rem;
+}
 .password-generator__settings-container {
   padding: 1.6rem;
   background-color: #24232c;

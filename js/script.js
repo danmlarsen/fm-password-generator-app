@@ -31,12 +31,18 @@ const handleGenerate = function (e) {
   if (numbers) allCharacters += allNumbers;
   if (symbols) allCharacters += allSymbols;
 
+  if (!allCharacters) return console.error("Must check at least one checkbox");
+
   let pwdString = "";
   while (pwdString.length < passwordLength) {
     const selectedIndex = Math.floor(Math.random() * allCharacters.length);
-    const char = allCharacters[selectedIndex];
+    const char = allCharacters.charAt(selectedIndex);
 
     pwdString += char;
+  }
+
+  if (pwdString.length >= 20) {
+    passwordOutputElement.classList.add("password-generator__password--long");
   }
 
   passwordOutputElement.textContent = pwdString;
