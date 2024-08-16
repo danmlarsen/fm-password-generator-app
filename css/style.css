@@ -91,6 +91,41 @@ input[type=checkbox]:checked::before {
   background-size: cover;
 }
 
+input[type=range] {
+  appearance: none;
+  width: 100%;
+  height: 0.8rem;
+  background-color: #18171f;
+  --fill-percent: 50%;
+}
+input[type=range]::-webkit-slider-thumb {
+  appearance: none;
+  width: 2.8rem;
+  height: 2.8rem;
+  background-color: #e6e5ea;
+  border: 1px solid #e6e5ea;
+  border-radius: 50%;
+  cursor: pointer;
+  transform: translateY(-25%);
+  transition: all 0.2s;
+}
+input[type=range]::-webkit-slider-thumb:hover, input[type=range]::-webkit-slider-thumb:focus {
+  background-color: #18171f;
+  border: 2px solid #a4ffaf;
+}
+input[type=range]::-webkit-slider-thumb:active {
+  cursor: grabbing;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1rem;
+  background: linear-gradient(to right, #a4ffaf 0%, #a4ffaf var(--fill-percent), transparent var(--fill-percent), transparent 100%);
+}
+
+label {
+  cursor: pointer;
+}
+
 .form-group {
   display: flex;
   align-items: center;
@@ -102,12 +137,25 @@ input[type=checkbox]:checked::before {
   padding: 1.6rem;
   background-color: #a4ffaf;
   color: #18171f;
-  border: none;
+  border: 1px solid #a4ffaf;
   text-transform: uppercase;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1.6rem;
+  cursor: pointer;
+  transition: 0.2s all ease-in-out;
+}
+.btn svg {
+  fill: #18171f;
+  transition: 0.2s all ease-in-out;
+}
+.btn:hover, .btn:active .btn:focus {
+  background-color: transparent;
+  color: #a4ffaf;
+}
+.btn:hover svg, .btn:active .btn:focus svg {
+  fill: #a4ffaf;
 }
 
 .password-generator {
