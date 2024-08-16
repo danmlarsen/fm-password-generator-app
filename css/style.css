@@ -1,0 +1,133 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #18171f;
+  color: #e6e5ea;
+  padding: 3.2rem 1.6rem;
+}
+
+h1,
+h2,
+h3,
+p {
+  word-wrap: break-word;
+}
+
+img,
+picture,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+textarea,
+button,
+option {
+  font: inherit;
+}
+
+ul[class] {
+  list-style: none;
+}
+
+@font-face {
+  font-family: "JetBrainsMono";
+  src: url("../assets/fonts/JetBrainsMono-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: "JetBrainsMono";
+  src: url("../assets/fonts/JetBrainsMono-Italic-VariableFont_wght.ttf");
+  font-style: italic;
+}
+body {
+  font-family: "JetBrainsMono";
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 1.5;
+}
+
+.primary-heading {
+  font-size: 2.4rem;
+  color: #817d92;
+  text-align: center;
+}
+
+input[type=checkbox] {
+  appearance: none;
+  display: grid;
+  place-content: center;
+  width: 1.15em;
+  height: 1.15em;
+  border: 3px solid #e6e5ea;
+  background-color: #18171f;
+  cursor: pointer;
+}
+input[type=checkbox]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+}
+input[type=checkbox]:checked {
+  background-color: #a4ffaf;
+  border-color: #a4ffaf;
+}
+input[type=checkbox]:checked::before {
+  background-image: url("../assets/images/icon-check.svg");
+  background-size: cover;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.btn {
+  width: 100%;
+  padding: 1.6rem;
+  background-color: #a4ffaf;
+  color: #18171f;
+  border: none;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.password-generator {
+  max-width: 54rem;
+  display: grid;
+  row-gap: 1.6rem;
+}
+.password-generator__password-container {
+  padding: 1.6rem;
+  background-color: #24232c;
+}
+.password-generator__settings-container {
+  padding: 1.6rem;
+  background-color: #24232c;
+  display: grid;
+  row-gap: 1.6rem;
+}
+.password-generator__strength-states {
+  padding: 1.6rem;
+  background-color: #18171f;
+}
+
+/*# sourceMappingURL=style.css.map */

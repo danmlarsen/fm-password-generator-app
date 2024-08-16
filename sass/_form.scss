@@ -1,0 +1,46 @@
+input[type='checkbox'] {
+    appearance: none;
+    display: grid;
+    place-content: center;
+    width: 1.15em;
+    height: 1.15em;
+    border: 3px solid $color-neutral-200;
+
+    background-color: $color-neutral-800;
+    cursor: pointer;
+
+    &::before {
+        content: '';
+        width: 0.65em;
+        height: 0.65em;
+    }
+
+    &:checked {
+        background-color: $color-primary-400;
+        border-color: $color-primary-400;
+    }
+
+    &:checked::before {
+        background-image: url('../assets/images/icon-check.svg');
+        background-size: cover;
+    }
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+}
+
+.btn {
+    width: 100%;
+    padding: 1.6rem;
+    background-color: $color-primary-400;
+    color: $color-neutral-800;
+    border: none;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.6rem;
+}

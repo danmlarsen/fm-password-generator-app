@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'JetBrainsMono';
+    src: url('../assets/fonts/JetBrainsMono-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: 'JetBrainsMono';
+    src: url('../assets/fonts/JetBrainsMono-Italic-VariableFont_wght.ttf');
+    font-style: italic;
+}
+
+body {
+    font-family: $ff-primary;
+    font-weight: $fw-regular;
+    font-size: $fs-400;
+    line-height: 1.5;
+}
+
+.primary-heading {
+    font-size: $fs-600;
+    color: $color-neutral-400;
+    text-align: center;
+}
