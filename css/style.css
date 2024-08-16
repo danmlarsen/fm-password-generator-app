@@ -16,6 +16,8 @@ body {
   background-color: #18171f;
   color: #e6e5ea;
   padding: 3.2rem 1.6rem;
+  display: flex;
+  justify-content: center;
 }
 
 h1,
@@ -131,6 +133,13 @@ label {
   align-items: center;
   gap: 1.6rem;
 }
+.form-group--slider {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+.form-group--slider input[type=range] {
+  grid-column: span 2;
+}
 
 .btn {
   width: 100%;
@@ -159,6 +168,7 @@ label {
 }
 
 .password-generator {
+  width: 100%;
   max-width: 54rem;
   display: grid;
   row-gap: 1.6rem;
@@ -166,6 +176,12 @@ label {
 .password-generator__password-container {
   padding: 1.6rem;
   background-color: #24232c;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+}
+.password-generator__password {
+  font-size: 3.2rem;
 }
 .password-generator__settings-container {
   padding: 1.6rem;
@@ -173,9 +189,65 @@ label {
   display: grid;
   row-gap: 1.6rem;
 }
+.password-generator__password-length {
+  color: #a4ffaf;
+  font-size: 3.2rem;
+}
 .password-generator__strength-states {
-  padding: 1.6rem;
+  padding: 2rem 3.2rem;
   background-color: #18171f;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+}
+.password-generator__strength-states p:first-child {
+  color: #817d92;
+}
+.password-generator__strength-states p:nth-child(2) {
+  font-size: 2.4rem;
+  margin-right: 1.5rem;
+}
+.password-generator__strength-boxes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+.password-generator__strength-boxes span {
+  display: inline-block;
+  height: 2.8rem;
+  width: 1rem;
+  border: 2px solid #e6e5ea;
+}
+.password-generator__strength-boxes--too-weak span:first-child {
+  background-color: #f64a4a;
+  border-color: #f64a4a;
+}
+.password-generator__strength-boxes--weak span:nth-child(1) {
+  background-color: #fb7c58;
+  border-color: #fb7c58;
+}
+.password-generator__strength-boxes--weak span:nth-child(2) {
+  background-color: #fb7c58;
+  border-color: #fb7c58;
+}
+.password-generator__strength-boxes--medium span:nth-child(1) {
+  background-color: #f8cd65;
+  border-color: #f8cd65;
+}
+.password-generator__strength-boxes--medium span:nth-child(2) {
+  background-color: #f8cd65;
+  border-color: #f8cd65;
+}
+.password-generator__strength-boxes--medium span:nth-child(3) {
+  background-color: #f8cd65;
+  border-color: #f8cd65;
+}
+.password-generator__strength-boxes--strong span {
+  background-color: #a4ffaf;
+  border-color: #a4ffaf;
 }
 
 /*# sourceMappingURL=style.css.map */
