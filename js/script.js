@@ -15,30 +15,29 @@ const allSymbols = '-_#$%*@.!';
 const renderPasswordStrength = function (password) {
     let strength = password.length / 16;
 
-    if (password.match(/[a-z]+/)) strength += .5;
-    if (password.match(/[A-Z]+/)) strength += .5;
-    if (password.match(/[0-9]+/)) strength += .5;
-    if (password.match(new RegExp(`[${allSymbols}]+`))) strength += .5;
+    if (password.match(/[a-z]+/)) strength += 0.5;
+    if (password.match(/[A-Z]+/)) strength += 0.5;
+    if (password.match(/[0-9]+/)) strength += 0.5;
+    if (password.match(new RegExp(`[${allSymbols}]+`))) strength += 0.5;
 
     strength = Math.floor(strength);
 
     if (strength > 3) strength = 3;
     if (strength < 0) strength = 0;
 
-
     let passwordStrengthText = '';
     if (strength === 0) passwordStrengthText = 'Too weak';
     if (strength === 1) passwordStrengthText = 'Weak';
     if (strength === 2) passwordStrengthText = 'Medium';
     if (strength === 3) passwordStrengthText = 'Strong';
-    
+
     passwordStrengthBoxesElement.classList.remove('password-generator__strength-boxes--level-0');
     passwordStrengthBoxesElement.classList.remove('password-generator__strength-boxes--level-1');
     passwordStrengthBoxesElement.classList.remove('password-generator__strength-boxes--level-2');
     passwordStrengthBoxesElement.classList.remove('password-generator__strength-boxes--level-3');
 
     passwordStrengthBoxesElement.classList.add(`password-generator__strength-boxes--level-${strength}`);
-    
+
     passwordStrengthLevelElement.textContent = passwordStrengthText;
 };
 
@@ -79,7 +78,7 @@ const handleFormSubmit = function (e) {
     renderPasswordStrength(password);
 };
 
-const handleSlide = function (e) {
+const handleSlider = function (e) {
     const fillPercent = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
 
     slider.style.setProperty('--fill-percent', `${fillPercent}%`);
@@ -91,6 +90,8 @@ const handleCopy = function (e) {
     navigator.clipboard.writeText(passwordOutputElement.value);
 };
 
-slider.addEventListener('input', handleSlide);
+slider.addEventListener('input', handleSlider);
 passwordFormElement.addEventListener('submit', handleFormSubmit);
 copyPasswordIconElement.addEventListener('click', handleCopy);
+
+handleSlider();

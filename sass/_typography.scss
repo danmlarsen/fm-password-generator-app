@@ -14,10 +14,18 @@ body {
     font-weight: $fw-regular;
     font-size: $fs-400;
     line-height: 1.5;
+
+    @media screen and (max-width: 48em) {
+        font-size: $fs-300;
+    }
 }
 
 .primary-heading {
     font-size: $fs-600;
     color: $color-neutral-400;
     text-align: center;
+
+    @media screen and (max-width: 48em) {
+        font-size: $fs-400;
+    }
 }

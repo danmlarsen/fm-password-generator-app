@@ -20,6 +20,11 @@ body {
   align-items: center;
   justify-content: center;
 }
+@media screen and (max-width: 48em) {
+  body {
+    align-items: flex-start;
+  }
+}
 
 h1,
 h2,
@@ -63,11 +68,21 @@ body {
   font-size: 1.8rem;
   line-height: 1.5;
 }
+@media screen and (max-width: 48em) {
+  body {
+    font-size: 1.6rem;
+  }
+}
 
 .primary-heading {
   font-size: 2.4rem;
   color: #817d92;
   text-align: center;
+}
+@media screen and (max-width: 48em) {
+  .primary-heading {
+    font-size: 1.8rem;
+  }
 }
 
 input[type=checkbox] {
@@ -179,6 +194,11 @@ label {
   background-color: #24232c;
   padding: 1.6rem 3.2rem;
 }
+@media screen and (max-width: 48em) {
+  .password-generator__password-container {
+    padding: 1.6rem;
+  }
+}
 .password-generator__password {
   color: inherit;
   font-size: 3.2rem;
@@ -186,9 +206,6 @@ label {
   background-color: transparent;
   border: none;
   outline: none;
-}
-.password-generator__password--long {
-  font-size: 2.4rem;
 }
 .password-generator__copy-icon {
   position: absolute;
@@ -202,6 +219,11 @@ label {
   background-color: #24232c;
   display: grid;
   row-gap: 2rem;
+}
+@media screen and (max-width: 48em) {
+  .password-generator__settings-container {
+    padding: 1.6rem;
+  }
 }
 .password-generator__password-length {
   color: #a4ffaf;
@@ -219,9 +241,24 @@ label {
 .password-generator__strength-states p:first-child {
   color: #817d92;
 }
-.password-generator__strength-states p:nth-child(2) {
+@media screen and (max-width: 48em) {
+  .password-generator__strength-states p:first-child {
+    font-size: 1.6rem;
+  }
+}
+@media screen and (max-width: 48em) {
+  .password-generator__strength-states {
+    padding: 1.6rem;
+  }
+}
+.password-generator__strength-level {
   font-size: 2.4rem;
   margin-right: 1.5rem;
+}
+@media screen and (max-width: 48em) {
+  .password-generator__strength-level {
+    font-size: 1.8rem;
+  }
 }
 .password-generator__strength-boxes {
   display: flex;
