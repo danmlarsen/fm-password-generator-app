@@ -1,0 +1,19 @@
+@keyframes copyNotification {
+    0% {
+        opacity: 0;
+        transform: translate(1rem, -50%) scale(0.25);
+    }
+
+    5% {
+        opacity: 1;
+        transform: translate(-75%, -50%) scale(1);
+    }
+
+    95% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
