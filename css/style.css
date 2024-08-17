@@ -17,6 +17,7 @@ body {
   color: #e6e5ea;
   padding: 3.2rem 1.6rem;
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
@@ -174,23 +175,33 @@ label {
   row-gap: 1.6rem;
 }
 .password-generator__password-container {
-  padding: 1.6rem;
+  position: relative;
   background-color: #24232c;
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  align-items: center;
+  padding: 1.6rem 3.2rem;
 }
 .password-generator__password {
+  color: inherit;
   font-size: 3.2rem;
+  width: 95%;
+  background-color: transparent;
+  border: none;
+  outline: none;
 }
 .password-generator__password--long {
   font-size: 2.4rem;
 }
+.password-generator__copy-icon {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
 .password-generator__settings-container {
-  padding: 1.6rem;
+  padding: 2.4rem 3.2rem 3.2rem;
   background-color: #24232c;
   display: grid;
-  row-gap: 1.6rem;
+  row-gap: 2rem;
 }
 .password-generator__password-length {
   color: #a4ffaf;

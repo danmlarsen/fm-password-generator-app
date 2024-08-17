@@ -1,116 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Password generator app</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Password generator app</title>
 
-    <link
-      rel="shortcut icon"
-      href="assets/images/favicon-32x32.png"
-      type="image/x-icon"
-    />
-    <link rel="stylesheet" href="css/style.css" />
+        <link rel="shortcut icon" href="assets/images/favicon-32x32.png" type="image/x-icon" />
+        <link rel="stylesheet" href="css/style.css" />
 
-    <script defer src="js/script.js"></script>
-  </head>
-  <body>
-    <main class="password-generator">
-      <h1 class="primary-heading">Password Generator</h1>
-      <div class="password-generator__password-container">
-        <p class="password-generator__password">P4$5W0rD!</p>
-        <svg
-          class="password-generator__copy-icon"
-          width="21"
-          height="24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M20.341 3.091 17.909.659A2.25 2.25 0 0 0 16.319 0H8.25A2.25 2.25 0 0 0 6 2.25V4.5H2.25A2.25 2.25 0 0 0 0 6.75v15A2.25 2.25 0 0 0 2.25 24h10.5A2.25 2.25 0 0 0 15 21.75V19.5h3.75A2.25 2.25 0 0 0 21 17.25V4.682a2.25 2.25 0 0 0-.659-1.591ZM12.469 21.75H2.53a.281.281 0 0 1-.281-.281V7.03a.281.281 0 0 1 .281-.281H6v10.5a2.25 2.25 0 0 0 2.25 2.25h4.5v1.969a.282.282 0 0 1-.281.281Zm6-4.5H8.53a.281.281 0 0 1-.281-.281V2.53a.281.281 0 0 1 .281-.281H13.5v4.125c0 .621.504 1.125 1.125 1.125h4.125v9.469a.282.282 0 0 1-.281.281Zm.281-12h-3v-3h.451c.075 0 .147.03.2.082L18.667 4.6a.283.283 0 0 1 .082.199v.451Z"
-            fill="#A4FFAF"
-          />
-        </svg>
-      </div>
-      <form
-        action="#"
-        method="post"
-        class="password-generator__form"
-        id="password-generator__form"
-        novalidate
-      >
-        <div class="password-generator__settings-container">
-          <div class="form-group form-group--slider">
-            <label for="password-length">Character Length</label>
-            <p class="password-generator__password-length">8</p>
-            <input
-              type="range"
-              name="password-length"
-              id="password-length"
-              value="16"
-              min="8"
-              max="32"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              type="checkbox"
-              name="include-uppercase"
-              id="include-uppercase"
-            />
-            <label for="include-uppercase">Include Uppercase Letters</label>
-          </div>
-          <div class="form-group">
-            <input
-              type="checkbox"
-              name="include-lowercase"
-              id="include-lowercase"
-            />
-            <label for="include-lowercase">Include Lowercase Letters</label>
-          </div>
-          <div class="form-group">
-            <input
-              type="checkbox"
-              name="include-numbers"
-              id="include-numbers"
-            />
-            <label for="include-numbers">Include Numbers</label>
-          </div>
-          <div class="form-group">
-            <input
-              type="checkbox"
-              name="include-symbols"
-              id="include-symbols"
-            />
-            <label for="include-symbols">Include Symbols</label>
-          </div>
-          <div class="password-generator__strength-states">
-            <p>Strength</p>
-            <p class="password-generator__strength-level">Medium</p>
-            <div
-              class="password-generator__strength-boxes password-generator__strength-boxes--strong"
-            >
-              <span>&nbsp</span>
-              <span>&nbsp</span>
-              <span>&nbsp</span>
-              <span>&nbsp</span>
+        <script defer src="js/script.js"></script>
+    </head>
+    <body>
+        <main class="password-generator">
+            <h1 class="primary-heading">Password Generator</h1>
+            <div class="password-generator__password-container">
+                <input type="text" class="password-generator__password" name="password" id="password" placeholder="P4$5W0rD!" readonly />
+                <!-- <p class="password-generator__password">P4$5W0rD!</p> -->
+                <svg class="password-generator__copy-icon" width="21" height="24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M20.341 3.091 17.909.659A2.25 2.25 0 0 0 16.319 0H8.25A2.25 2.25 0 0 0 6 2.25V4.5H2.25A2.25 2.25 0 0 0 0 6.75v15A2.25 2.25 0 0 0 2.25 24h10.5A2.25 2.25 0 0 0 15 21.75V19.5h3.75A2.25 2.25 0 0 0 21 17.25V4.682a2.25 2.25 0 0 0-.659-1.591ZM12.469 21.75H2.53a.281.281 0 0 1-.281-.281V7.03a.281.281 0 0 1 .281-.281H6v10.5a2.25 2.25 0 0 0 2.25 2.25h4.5v1.969a.282.282 0 0 1-.281.281Zm6-4.5H8.53a.281.281 0 0 1-.281-.281V2.53a.281.281 0 0 1 .281-.281H13.5v4.125c0 .621.504 1.125 1.125 1.125h4.125v9.469a.282.282 0 0 1-.281.281Zm.281-12h-3v-3h.451c.075 0 .147.03.2.082L18.667 4.6a.283.283 0 0 1 .082.199v.451Z"
+                        fill="#A4FFAF"
+                    />
+                </svg>
             </div>
-          </div>
-          <div class="form-group">
-            <button
-              type="submit"
-              class="btn password-generator__generate-btn"
-              id="generate-btn"
-            >
-              <span>Generate</span>
-              <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="m5.106 12 6-6-6-6-1.265 1.265 3.841 3.84H.001v1.79h7.681l-3.841 3.84z"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </form>
-    </main>
-  </body>
+            <form action="#" method="post" class="password-generator__form" id="password-generator__form" novalidate>
+                <div class="password-generator__settings-container">
+                    <div class="form-group form-group--slider">
+                        <label for="password-length">Character Length</label>
+                        <p class="password-generator__password-length">8</p>
+                        <input type="range" name="password-length" id="password-length" value="10" min="8" max="32" />
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="include-uppercase" id="include-uppercase" />
+                        <label for="include-uppercase">Include Uppercase Letters</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="include-lowercase" id="include-lowercase" />
+                        <label for="include-lowercase">Include Lowercase Letters</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="include-numbers" id="include-numbers" />
+                        <label for="include-numbers">Include Numbers</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="include-symbols" id="include-symbols" />
+                        <label for="include-symbols">Include Symbols</label>
+                    </div>
+                    <div class="password-generator__strength-states">
+                        <p>Strength</p>
+                        <p class="password-generator__strength-level">Medium</p>
+                        <div class="password-generator__strength-boxes password-generator__strength-boxes--strong">
+                            <span>&nbsp</span>
+                            <span>&nbsp</span>
+                            <span>&nbsp</span>
+                            <span>&nbsp</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn password-generator__generate-btn" id="generate-btn">
+                            <span>Generate</span>
+                            <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m5.106 12 6-6-6-6-1.265 1.265 3.841 3.84H.001v1.79h7.681l-3.841 3.84z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </main>
+    </body>
 </html>
