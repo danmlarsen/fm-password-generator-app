@@ -2,6 +2,7 @@ const slider = document.getElementById('password-length');
 const passwordLengthCounter = document.querySelector('.password-generator__password-length');
 const generateBtnElement = document.getElementById('generate-btn');
 const passwordFormElement = document.getElementById('password-generator__form');
+const passwordContainerElement = document.querySelector('.password-generator__password-container');
 const passwordOutputElement = document.querySelector('.password-generator__password');
 const copyPasswordIconElement = document.querySelector('.password-generator__copy-icon');
 const passwordStrengthContainer = document.querySelector('.password-generator__strength-states');
@@ -12,13 +13,18 @@ const allLetters = 'abcdefghijklmnopqrstuvwxyz';
 const allNumbers = '0123456789';
 const allSymbols = '-_#$%*@.!';
 
+const containsLowerLetter = str => str.match(/[a-z]+/);
+const containsUpperLetter = str => str.match(/[A-Z]+/);
+const containsNumber = str => str.match(/[0-9]+/);
+const containsSymbol = str => str.match(new RegExp(`[${allSymbols}]+`));
+
 const renderPasswordStrength = function (password) {
     let strength = password.length / 16;
 
-    if (password.match(/[a-z]+/)) strength += 0.5;
-    if (password.match(/[A-Z]+/)) strength += 0.5;
-    if (password.match(/[0-9]+/)) strength += 0.5;
-    if (password.match(new RegExp(`[${allSymbols}]+`))) strength += 0.5;
+    if (containsLowerLetter(password)) strength += 0.5;
+    if (containsUpperLetter(password)) strength += 0.5;
+    if (containsNumber(password)) strength += 0.5;
+    if (containsSymbol(password)) strength += 0.5;
 
     strength = Math.floor(strength);
 
@@ -88,6 +94,16 @@ const handleSlider = function (e) {
 
 const handleCopy = function (e) {
     navigator.clipboard.writeText(passwordOutputElement.value);
+
+    passwordContainerElement.querySelector('.password-generator__copied-text')?.remove();
+
+    const element = document.createElement('p');
+    element.classList.add('password-generator__copied-text');
+    element.textContent = 'Copied';
+
+    element.addEventListener('animationend', e => e.target.remove());
+
+    passwordContainerElement.append(element);
 };
 
 slider.addEventListener('input', handleSlider);

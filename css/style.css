@@ -202,10 +202,15 @@ label {
 .password-generator__password {
   color: inherit;
   font-size: 3.2rem;
-  width: 95%;
+  width: 75%;
   background-color: transparent;
   border: none;
   outline: none;
+}
+@media screen and (max-width: 48em) {
+  .password-generator__password {
+    font-size: 2.4rem;
+  }
 }
 .password-generator__copy-icon {
   position: absolute;
@@ -213,6 +218,16 @@ label {
   right: 0;
   transform: translate(-50%, -50%);
   cursor: pointer;
+}
+.password-generator__copied-text {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(-75%, -50%);
+  text-transform: uppercase;
+  color: #a4ffaf;
+  z-index: 10;
+  animation: showCopyText 3s ease-in-out forwards;
 }
 .password-generator__settings-container {
   padding: 2.4rem 3.2rem 3.2rem;
@@ -287,6 +302,23 @@ label {
   height: 2.8rem;
   width: 1rem;
   border: 2px solid #e6e5ea;
+}
+
+@keyframes showCopyText {
+  0% {
+    opacity: 0;
+    transform: translate(1rem, -50%) scale(0.25);
+  }
+  5% {
+    opacity: 1;
+    transform: translate(-75%, -50%) scale(1);
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
