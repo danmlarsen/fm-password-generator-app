@@ -4,13 +4,42 @@ const generateBtnElement = document.getElementById('generate-btn');
 const passwordFormElement = document.getElementById('password-generator__form');
 const passwordOutputElement = document.querySelector('.password-generator__password');
 const copyPasswordIconElement = document.querySelector('.password-generator__copy-icon');
+const passwordStrengthContainer = document.querySelector('.password-generator__strength-states');
+const passwordStrengthBoxesElement = document.querySelector('.password-generator__strength-boxes');
+const passwordStrengthLevelElement = document.querySelector('.password-generator__strength-level');
 
 const allLetters = 'abcdefghijklmnopqrstuvwxyz';
 const allNumbers = '0123456789';
 const allSymbols = '-_#$%*@.!';
 
 const renderPasswordStrength = function (password) {
-    let strength = 0;
+    let strength = password.length / 16;
+
+    if (password.match(/[a-z]+/)) strength += .5;
+    if (password.match(/[A-Z]+/)) strength += .5;
+    if (password.match(/[0-9]+/)) strength += .5;
+    if (password.match(new RegExp(`[${allSymbols}]+`))) strength += .5;
+
+    strength = Math.floor(strength);
+
+    if (strength > 3) strength = 3;
+    if (strength < 0) strength = 0;
+
+
+    let passwordStrengthText = '';
+    if (strength === 0) passwordStrengthText = 'Too weak';
+    if (strength === 1) passwordStrengthText = 'Weak';
+    if (strength === 2) passwordStrengthText = 'Medium';
+    if (strength === 3) passwordStrengthText = 'Strong';
+    
+    passwordStrengthBoxesElement.classList.remove('password-generator__strength-boxes--level-0');
+    passwordStrengthBoxesElement.classList.remove('password-generator__strength-boxes--level-1');
+    passwordStrengthBoxesElement.classList.remove('password-generator__strength-boxes--level-2');
+    passwordStrengthBoxesElement.classList.remove('password-generator__strength-boxes--level-3');
+
+    passwordStrengthBoxesElement.classList.add(`password-generator__strength-boxes--level-${strength}`);
+    
+    passwordStrengthLevelElement.textContent = passwordStrengthText;
 };
 
 const generatePassword = function (data) {
@@ -45,13 +74,9 @@ const handleFormSubmit = function (e) {
 
     if (!password) return;
 
-    // if (password.length >= 20) {
-    //     passwordOutputElement.classList.add('password-generator__password--long');
-    // }
-
-    // passwordOutputElement.textContent = password;
-
     passwordOutputElement.value = password;
+
+    renderPasswordStrength(password);
 };
 
 const handleSlide = function (e) {
