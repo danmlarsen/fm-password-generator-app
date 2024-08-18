@@ -84,6 +84,8 @@ label {
     &--slider {
         display: grid;
         grid-template-columns: 1fr auto;
+        margin-bottom: 2.2rem;
+        gap: 2.5rem;
 
         input[type='range'] {
             grid-column: span 2;

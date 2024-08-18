@@ -87,7 +87,7 @@ body {
   font-family: "JetBrainsMono";
   font-weight: 700;
   font-size: 1.8rem;
-  line-height: 1.5;
+  line-height: 1.277777;
 }
 @media screen and (max-width: 48em) {
   body {
@@ -178,6 +178,8 @@ label {
 .form-group--slider {
   display: grid;
   grid-template-columns: 1fr auto;
+  margin-bottom: 2.2rem;
+  gap: 2.5rem;
 }
 .form-group--slider input[type=range] {
   grid-column: span 2;
@@ -213,7 +215,7 @@ label {
   width: 100%;
   max-width: 54rem;
   display: grid;
-  row-gap: 1.6rem;
+  row-gap: 2.4rem;
 }
 .password-generator__password-container {
   position: relative;
