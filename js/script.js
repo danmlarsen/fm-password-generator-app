@@ -9,17 +9,37 @@ const passwordStrengthContainer = document.querySelector('.password-generator__s
 const passwordStrengthBoxesElement = document.querySelector('.password-generator__strength-boxes');
 const passwordStrengthLevelElement = document.querySelector('.password-generator__strength-level');
 
+const PASSWORD_ITERATIONS = 10;
+
 const allLetters = 'abcdefghijklmnopqrstuvwxyz';
 const allNumbers = '0123456789';
-const allSymbols = '-_#$%*@.!';
+const allSymbols = ' !@#$%^&*()-+';
 
 const containsLowerLetter = str => str.match(/[a-z]+/);
 const containsUpperLetter = str => str.match(/[A-Z]+/);
 const containsNumber = str => str.match(/[0-9]+/);
 const containsSymbol = str => str.match(new RegExp(`[${allSymbols}]+`));
 
+const getUniqueCharacters = function (string) {
+    string = string.split('');
+    string = new Set(string);
+    string = [...string].join('');
+    return string;
+};
+
+const replaceRandomChar = function (string, chars) {
+    const selectedCharIndex = Math.floor(Math.random() * chars.length);
+    const char = chars.charAt(selectedCharIndex);
+
+    string = string.split('');
+    const selectedStringIndex = Math.floor(Math.random() * string.length);
+    string.splice(selectedStringIndex, 1, char);
+
+    return string.join('');
+};
+
 const renderPasswordStrength = function (password) {
-    let strength = password.length / 8;
+    let strength = getUniqueCharacters(password).length / 8;
 
     if (containsLowerLetter(password)) strength += 0.25;
     if (containsUpperLetter(password)) strength += 0.25;
@@ -64,6 +84,18 @@ const generatePassword = function (data) {
         const char = allCharacters.charAt(selectedIndex);
 
         pwdString += char;
+    }
+
+    let counter = 0;
+    while ((lowercase && !containsLowerLetter(pwdString)) || (uppercase && !containsUpperLetter(pwdString)) || (numbers && !containsNumber(pwdString)) || (symbols && !containsSymbol(pwdString))) {
+        if (counter == PASSWORD_ITERATIONS) break;
+
+        pwdString = replaceRandomChar(pwdString, allCharacters);
+        pwdString = replaceRandomChar(pwdString, allCharacters.toUpperCase());
+        pwdString = replaceRandomChar(pwdString, allNumbers);
+        pwdString = replaceRandomChar(pwdString, allSymbols);
+
+        counter++;
     }
 
     return pwdString;
