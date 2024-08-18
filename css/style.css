@@ -1,3 +1,15 @@
+.u-mb-sm {
+  margin-bottom: 1.6rem;
+}
+
+.u-mb-md {
+  margin-bottom: 3.2rem;
+}
+
+.u-mb-lg {
+  margin-bottom: 4.2rem;
+}
+
 @keyframes copyNotification {
   0% {
     opacity: 0;
@@ -240,17 +252,22 @@ label {
     font-size: 2.4rem;
   }
 }
-.password-generator__copy-icon {
+.password-generator__copy-btn {
   position: absolute;
   top: 50%;
   right: 0;
   transform: translate(-50%, -50%);
-  fill: #a4ffaf;
-  transition: fill 0.2s ease-in-out;
+  appearance: none;
+  background: none;
+  border: none;
   cursor: pointer;
 }
-.password-generator__copy-icon:hover, .password-generator__copy-icon:active {
+.password-generator__copy-btn:hover .password-generator__copy-icon, .password-generator__copy-btn:active .password-generator__copy-icon, .password-generator__copy-btn:focus .password-generator__copy-icon {
   fill: #e6e5ea;
+}
+.password-generator__copy-icon {
+  fill: #a4ffaf;
+  transition: fill 0.2s ease-in-out;
 }
 .password-generator__copied-text {
   position: absolute;
@@ -278,6 +295,10 @@ label {
 .password-generator__password-length {
   color: #a4ffaf;
   font-size: 3.2rem;
+}
+.password-generator__checkboxes {
+  display: grid;
+  row-gap: 2rem;
 }
 .password-generator__strength-states {
   padding: 2rem 3.2rem;

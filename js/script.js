@@ -4,7 +4,7 @@ const generateBtnElement = document.getElementById('generate-btn');
 const passwordFormElement = document.getElementById('password-generator__form');
 const passwordContainerElement = document.querySelector('.password-generator__password-container');
 const passwordOutputElement = document.querySelector('.password-generator__password');
-const copyPasswordIconElement = document.querySelector('.password-generator__copy-icon');
+const copyPasswordElement = document.querySelector('.password-generator__copy-btn');
 const passwordStrengthContainer = document.querySelector('.password-generator__strength-states');
 const passwordStrengthBoxesElement = document.querySelector('.password-generator__strength-boxes');
 const passwordStrengthLevelElement = document.querySelector('.password-generator__strength-level');
@@ -19,17 +19,16 @@ const containsNumber = str => str.match(/[0-9]+/);
 const containsSymbol = str => str.match(new RegExp(`[${allSymbols}]+`));
 
 const renderPasswordStrength = function (password) {
-    let strength = password.length / 16;
+    let strength = password.length / 8;
 
-    if (containsLowerLetter(password)) strength += 0.5;
-    if (containsUpperLetter(password)) strength += 0.5;
-    if (containsNumber(password)) strength += 0.5;
-    if (containsSymbol(password)) strength += 0.5;
+    if (containsLowerLetter(password)) strength += 0.25;
+    if (containsUpperLetter(password)) strength += 0.25;
+    if (containsNumber(password)) strength += 0.25;
+    if (containsSymbol(password)) strength += 0.25;
 
     strength = Math.floor(strength);
 
     if (strength > 3) strength = 3;
-    if (strength < 0) strength = 0;
 
     let passwordStrengthText = '';
     if (strength === 0) passwordStrengthText = 'Too weak';
@@ -74,7 +73,6 @@ const handleFormSubmit = function (e) {
     e.preventDefault();
 
     const data = Object.fromEntries(new FormData(e.target));
-
     const password = generatePassword(data);
 
     if (!password) return;
@@ -84,7 +82,7 @@ const handleFormSubmit = function (e) {
     renderPasswordStrength(password);
 };
 
-const handleSlider = function (e) {
+const handleSlider = function () {
     const fillPercent = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
 
     slider.style.setProperty('--fill-percent', `${fillPercent}%`);
@@ -92,7 +90,7 @@ const handleSlider = function (e) {
     passwordLengthCounter.textContent = slider.value;
 };
 
-const handleCopy = function (e) {
+const handleCopy = function () {
     navigator.clipboard.writeText(passwordOutputElement.value);
 
     passwordContainerElement.querySelector('.password-generator__copied-text')?.remove();
@@ -104,10 +102,12 @@ const handleCopy = function (e) {
     element.addEventListener('animationend', e => e.target.remove());
 
     passwordContainerElement.append(element);
+
+    this.blur();
 };
 
 slider.addEventListener('input', handleSlider);
 passwordFormElement.addEventListener('submit', handleFormSubmit);
-copyPasswordIconElement.addEventListener('click', handleCopy);
+copyPasswordElement.addEventListener('click', handleCopy);
 
 handleSlider();
