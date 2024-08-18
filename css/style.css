@@ -287,6 +287,7 @@ label {
 @media screen and (max-width: 48em) {
   .password-generator__password {
     font-size: 2.4rem;
+    padding: 1.6rem;
   }
 }
 .password-generator__copy-btn {
