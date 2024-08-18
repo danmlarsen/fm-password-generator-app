@@ -112,9 +112,10 @@ input[type=checkbox] {
   place-content: center;
   width: 1.15em;
   height: 1.15em;
-  border: 3px solid #e6e5ea;
+  border: 2px solid #e6e5ea;
   background-color: #18171f;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 input[type=checkbox]::before {
   content: "";
@@ -128,6 +129,9 @@ input[type=checkbox]:checked {
 input[type=checkbox]:checked::before {
   background-image: url("../assets/images/icon-check.svg");
   background-size: cover;
+}
+input[type=checkbox]:hover, input[type=checkbox]:active, input[type=checkbox]:focus {
+  border-color: #a4ffaf;
 }
 
 input[type=range] {
@@ -239,7 +243,12 @@ label {
   top: 50%;
   right: 0;
   transform: translate(-50%, -50%);
+  fill: #a4ffaf;
+  transition: fill 0.2s ease-in-out;
   cursor: pointer;
+}
+.password-generator__copy-icon:hover, .password-generator__copy-icon:active {
+  fill: #e6e5ea;
 }
 .password-generator__copied-text {
   position: absolute;

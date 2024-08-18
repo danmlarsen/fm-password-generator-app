@@ -4,10 +4,12 @@ input[type='checkbox'] {
     place-content: center;
     width: 1.15em;
     height: 1.15em;
-    border: 3px solid $color-neutral-200;
+    border: 2px solid $color-neutral-200;
 
     background-color: $color-neutral-800;
     cursor: pointer;
+
+    transition: all 0.2s ease-in-out;
 
     &::before {
         content: '';
@@ -23,6 +25,12 @@ input[type='checkbox'] {
     &:checked::before {
         background-image: url('../assets/images/icon-check.svg');
         background-size: cover;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+        border-color: $color-primary-400;
     }
 }
 
