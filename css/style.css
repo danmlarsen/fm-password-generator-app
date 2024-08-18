@@ -162,7 +162,7 @@ input[type=range]::-webkit-slider-thumb {
   border: 1px solid #e6e5ea;
   border-radius: 50%;
   cursor: pointer;
-  transform: translateY(-25%);
+  margin-top: -1rem;
   transition: all 0.2s;
 }
 input[type=range]::-webkit-slider-thumb:hover, input[type=range]::-webkit-slider-thumb:focus {
@@ -172,7 +172,29 @@ input[type=range]::-webkit-slider-thumb:hover, input[type=range]::-webkit-slider
 input[type=range]::-webkit-slider-thumb:active {
   cursor: grabbing;
 }
+input[type=range]::-moz-range-thumb {
+  appearance: none;
+  width: 2.8rem;
+  height: 2.8rem;
+  background-color: #e6e5ea;
+  border: 1px solid #e6e5ea;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+input[type=range]::-moz-range-thumb:hover, input[type=range]::-moz-range-thumb:focus {
+  background-color: #18171f;
+  border: 2px solid #a4ffaf;
+}
+input[type=range]::-moz-range-thumb:active {
+  cursor: grabbing;
+}
 input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1rem;
+  background: linear-gradient(to right, #a4ffaf 0%, #a4ffaf var(--fill-percent), transparent var(--fill-percent), transparent 100%);
+}
+input[type=range]::-moz-range-track {
   width: 100%;
   height: 1rem;
   background: linear-gradient(to right, #a4ffaf 0%, #a4ffaf var(--fill-percent), transparent var(--fill-percent), transparent 100%);
