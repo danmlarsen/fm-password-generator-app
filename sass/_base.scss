@@ -22,11 +22,15 @@ body {
     padding: 3.2rem 1.6rem;
 
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+}
+
+main {
+    margin-top: 13.3rem;
 
     @media screen and (max-width: 48em) {
-        align-items: flex-start;
+        margin-top: 0;
     }
 }
 

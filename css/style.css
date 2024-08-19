@@ -52,12 +52,16 @@ body {
   color: #e6e5ea;
   padding: 3.2rem 1.6rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
+
+main {
+  margin-top: 13.3rem;
+}
 @media screen and (max-width: 48em) {
-  body {
-    align-items: flex-start;
+  main {
+    margin-top: 0;
   }
 }
 
