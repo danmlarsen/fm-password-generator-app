@@ -13,7 +13,7 @@ const PASSWORD_ITERATIONS = 10;
 
 const allLetters = 'abcdefghijklmnopqrstuvwxyz';
 const allNumbers = '0123456789';
-const allSymbols = ' !@#$%^&*()-+';
+const allSymbols = '!@#$%^&*()-+';
 
 const containsLowerLetter = str => str.match(/[a-z]+/);
 const containsUpperLetter = str => str.match(/[A-Z]+/);
@@ -38,7 +38,7 @@ const replaceRandomChar = function (string, chars) {
     return string.join('');
 };
 
-const renderPasswordStrength = function (password) {
+const getPasswordStrengthScore = function (password) {
     let strength = getUniqueCharacters(password).length / 8;
 
     if (containsLowerLetter(password)) strength += 0.25;
@@ -50,33 +50,43 @@ const renderPasswordStrength = function (password) {
 
     if (strength > 3) strength = 3;
 
-    let passwordStrengthText = '';
-    if (strength === 0) passwordStrengthText = 'Too weak';
-    if (strength === 1) passwordStrengthText = 'Weak';
-    if (strength === 2) passwordStrengthText = 'Medium';
-    if (strength === 3) passwordStrengthText = 'Strong';
+    return strength;
+};
 
+const renderStrengthBoxes = function (passwordStrength) {
     passwordStrengthBoxesElement.classList.remove('password-generator__strength-boxes--level-0');
     passwordStrengthBoxesElement.classList.remove('password-generator__strength-boxes--level-1');
     passwordStrengthBoxesElement.classList.remove('password-generator__strength-boxes--level-2');
     passwordStrengthBoxesElement.classList.remove('password-generator__strength-boxes--level-3');
 
-    passwordStrengthBoxesElement.classList.add(`password-generator__strength-boxes--level-${strength}`);
+    passwordStrengthBoxesElement.classList.add(`password-generator__strength-boxes--level-${passwordStrength}`);
+};
 
+const renderPasswordStrength = function (password) {
+    const passwordStrength = getPasswordStrengthScore(password);
+
+    let passwordStrengthText = '';
+    if (passwordStrength === 0) passwordStrengthText = 'Too weak';
+    if (passwordStrength === 1) passwordStrengthText = 'Weak';
+    if (passwordStrength === 2) passwordStrengthText = 'Medium';
+    if (passwordStrength === 3) passwordStrengthText = 'Strong';
+
+    renderStrengthBoxes(passwordStrength);
     passwordStrengthLevelElement.textContent = passwordStrengthText;
 };
 
-const generatePassword = function (data) {
-    const { 'password-length': passwordLength, 'include-uppercase': uppercase, 'include-lowercase': lowercase, 'include-numbers': numbers, 'include-symbols': symbols } = data;
+const renderPassword = function (password) {
+    if (!password) return;
+    passwordOutputElement.value = password;
+};
 
+const generatePassword = function ({ passwordLength, uppercase, lowercase, numbers, symbols }) {
     let allCharacters = '';
 
     if (lowercase) allCharacters += allLetters;
     if (uppercase) allCharacters += allLetters.toUpperCase();
     if (numbers) allCharacters += allNumbers;
     if (symbols) allCharacters += allSymbols;
-
-    if (!allCharacters) return console.error('Must check at least one checkbox');
 
     let pwdString = '';
     while (pwdString.length < passwordLength) {
@@ -105,12 +115,20 @@ const handleFormSubmit = function (e) {
     e.preventDefault();
 
     const data = Object.fromEntries(new FormData(e.target));
-    const password = generatePassword(data);
+    const { 'password-length': passwordLength, 'include-uppercase': uppercase, 'include-lowercase': lowercase, 'include-numbers': numbers, 'include-symbols': symbols } = data;
 
-    if (!password) return;
+    if (passwordLength <= 0) return;
+    if (!uppercase && !lowercase && !numbers && !symbols) return console.error('Must check at least one checkbox');
 
-    passwordOutputElement.value = password;
+    const password = generatePassword({
+        passwordLength,
+        uppercase,
+        lowercase,
+        numbers,
+        symbols,
+    });
 
+    renderPassword(password);
     renderPasswordStrength(password);
 };
 

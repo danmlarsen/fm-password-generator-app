@@ -147,6 +147,9 @@ input[type=checkbox]:checked::before {
 input[type=checkbox]:hover, input[type=checkbox]:active, input[type=checkbox]:focus {
   border-color: #a4ffaf;
 }
+input[type=checkbox]:focus-visible {
+  outline: 2px solid #a4ffaf;
+}
 
 input[type=range] {
   appearance: none;
@@ -218,6 +221,9 @@ input[type=range]::-moz-range-track {
   height: 1rem;
   background: linear-gradient(to right, #a4ffaf 0%, #a4ffaf var(--fill-percent), transparent var(--fill-percent), transparent 100%);
 }
+input[type=range]:focus-visible {
+  outline: 2px solid #a4ffaf;
+}
 
 label {
   cursor: pointer;
@@ -255,13 +261,16 @@ label {
   fill: #18171f;
   transition: 0.2s all ease-in-out;
 }
-.btn:hover, .btn:active .btn:focus {
+.btn:hover, .btn:active, .btn:focus {
   background-color: transparent;
   border: 2px solid #a4ffaf;
   color: #a4ffaf;
 }
-.btn:hover svg, .btn:active .btn:focus svg {
+.btn:hover svg, .btn:active svg, .btn:focus svg {
   fill: #a4ffaf;
+}
+.btn:focus-visible {
+  outline: 1px solid #a4ffaf;
 }
 
 .password-generator {
@@ -301,6 +310,10 @@ label {
 }
 .password-generator__copy-btn:hover .password-generator__copy-icon, .password-generator__copy-btn:active .password-generator__copy-icon, .password-generator__copy-btn:focus .password-generator__copy-icon {
   fill: #e6e5ea;
+}
+.password-generator__copy-btn:focus-visible {
+  outline: 1px solid #a4ffaf;
+  outline-offset: 2px;
 }
 .password-generator__copy-icon {
   fill: #a4ffaf;
