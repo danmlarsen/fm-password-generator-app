@@ -296,6 +296,7 @@ label {
   .password-generator__password {
     font-size: 2.4rem;
     padding: 1.6rem;
+    width: 85%;
   }
 }
 .password-generator__copy-btn {

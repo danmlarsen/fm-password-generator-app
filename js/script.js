@@ -1,58 +1,99 @@
-const slider = document.getElementById('password-length');
-const passwordLengthCounter = document.querySelector('.password-generator__password-length');
+//
+//  Config
+//
+const PASSWORD_MINLENGTH = 10;
+const PASSWORD_LETTERS = 'abcdefghijklmnopqrstuvwxyz';
+const PASSWORD_NUMBERS = '0123456789';
+const PASSWORD_SYMBOLS = '!@#$%^&*()-+';
+
+//
+// DOM Selections
+//
+const sliderElement = document.getElementById('password-length');
+const passwordLengthCounterElement = document.querySelector('.password-generator__password-length');
 const generateBtnElement = document.getElementById('generate-btn');
 const passwordFormElement = document.getElementById('password-generator__form');
 const passwordContainerElement = document.querySelector('.password-generator__password-container');
 const passwordOutputElement = document.querySelector('.password-generator__password');
 const copyPasswordElement = document.querySelector('.password-generator__copy-btn');
-const passwordStrengthContainer = document.querySelector('.password-generator__strength-states');
+const passwordStrengthContainerElement = document.querySelector('.password-generator__strength-states');
 const passwordStrengthBoxesElement = document.querySelector('.password-generator__strength-boxes');
 const passwordStrengthLevelElement = document.querySelector('.password-generator__strength-level');
 
-const PASSWORD_ITERATIONS = 10;
-
-const allLetters = 'abcdefghijklmnopqrstuvwxyz';
-const allNumbers = '0123456789';
-const allSymbols = '!@#$%^&*()-+';
-
+//
+// Helper functions
+//
 const containsLowerLetter = str => str.match(/[a-z]+/);
 const containsUpperLetter = str => str.match(/[A-Z]+/);
 const containsNumber = str => str.match(/[0-9]+/);
-const containsSymbol = str => str.match(new RegExp(`[${allSymbols}]+`));
+const containsSymbol = str => str.match(new RegExp(`[${PASSWORD_SYMBOLS}]+`));
 
-const getUniqueCharacters = function (string) {
-    string = string.split('');
-    string = new Set(string);
-    string = [...string].join('');
-    return string;
-};
+const calcPasswordStrengthScore = function (password) {
+    let strength = (password.length - PASSWORD_MINLENGTH) / 2;
 
-const replaceRandomChar = function (string, chars) {
-    const selectedCharIndex = Math.floor(Math.random() * chars.length);
-    const char = chars.charAt(selectedCharIndex);
-
-    string = string.split('');
-    const selectedStringIndex = Math.floor(Math.random() * string.length);
-    string.splice(selectedStringIndex, 1, char);
-
-    return string.join('');
-};
-
-const getPasswordStrengthScore = function (password) {
-    let strength = getUniqueCharacters(password).length / 8;
-
-    if (containsLowerLetter(password)) strength += 0.25;
-    if (containsUpperLetter(password)) strength += 0.25;
-    if (containsNumber(password)) strength += 0.25;
-    if (containsSymbol(password)) strength += 0.25;
+    if (containsLowerLetter(password)) strength += 1;
+    if (containsUpperLetter(password)) strength += 1;
+    if (containsNumber(password)) strength += 0.5;
+    if (containsSymbol(password)) strength += 0.5;
 
     strength = Math.floor(strength);
 
     if (strength > 3) strength = 3;
+    if (strength < 0) strength = 0;
 
     return strength;
 };
 
+const calcSliderFillPercent = slider => ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+
+const shuffleString = function (str) {
+    arr = str.split('');
+    let currentIndex = arr.length;
+
+    while (currentIndex != 0) {
+        let randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        [arr[currentIndex], arr[randomIndex]] = [arr[randomIndex], arr[currentIndex]];
+    }
+
+    return arr.join('');
+};
+
+const selectRandomCharacter = function (chars) {
+    const selectedIndex = Math.floor(Math.random() * chars.length);
+    return chars.charAt(selectedIndex);
+};
+
+const generatePassword = function ({ passwordLength, uppercase, lowercase, numbers, symbols }) {
+    let allCharacters = '';
+
+    if (lowercase) allCharacters += PASSWORD_LETTERS;
+    if (uppercase) allCharacters += PASSWORD_LETTERS.toUpperCase();
+    if (numbers) allCharacters += PASSWORD_NUMBERS;
+    if (symbols) allCharacters += PASSWORD_SYMBOLS;
+
+    let passwordString = '';
+    while (passwordString.length < passwordLength) {
+        if (lowercase && !containsLowerLetter(passwordString)) {
+            passwordString += selectRandomCharacter(PASSWORD_LETTERS);
+        } else if (uppercase && !containsUpperLetter(passwordString)) {
+            passwordString += selectRandomCharacter(PASSWORD_LETTERS.toUpperCase());
+        } else if (numbers && !containsNumber(passwordString)) {
+            passwordString += selectRandomCharacter(PASSWORD_NUMBERS);
+        } else if (symbols && !containsSymbol(passwordString)) {
+            passwordString += selectRandomCharacter(PASSWORD_SYMBOLS);
+        } else {
+            passwordString += selectRandomCharacter(allCharacters);
+        }
+    }
+
+    return shuffleString(passwordString);
+};
+
+//
+// Render Functions
+//
 const renderStrengthBoxes = function (passwordStrength) {
     passwordStrengthBoxesElement.classList.remove('password-generator__strength-boxes--level-0');
     passwordStrengthBoxesElement.classList.remove('password-generator__strength-boxes--level-1');
@@ -63,7 +104,7 @@ const renderStrengthBoxes = function (passwordStrength) {
 };
 
 const renderPasswordStrength = function (password) {
-    const passwordStrength = getPasswordStrengthScore(password);
+    const passwordStrength = calcPasswordStrengthScore(password);
 
     let passwordStrengthText = '';
     if (passwordStrength === 0) passwordStrengthText = 'Too weak';
@@ -80,37 +121,25 @@ const renderPassword = function (password) {
     passwordOutputElement.value = password;
 };
 
-const generatePassword = function ({ passwordLength, uppercase, lowercase, numbers, symbols }) {
-    let allCharacters = '';
+const renderCopyNotification = function () {
+    passwordContainerElement.querySelector('.password-generator__copied-text')?.remove();
 
-    if (lowercase) allCharacters += allLetters;
-    if (uppercase) allCharacters += allLetters.toUpperCase();
-    if (numbers) allCharacters += allNumbers;
-    if (symbols) allCharacters += allSymbols;
+    const element = document.createElement('p');
+    element.classList.add('password-generator__copied-text');
+    element.textContent = 'Copied';
 
-    let pwdString = '';
-    while (pwdString.length < passwordLength) {
-        const selectedIndex = Math.floor(Math.random() * allCharacters.length);
-        const char = allCharacters.charAt(selectedIndex);
+    element.addEventListener('animationend', e => e.target.remove());
 
-        pwdString += char;
-    }
-
-    let counter = 0;
-    while ((lowercase && !containsLowerLetter(pwdString)) || (uppercase && !containsUpperLetter(pwdString)) || (numbers && !containsNumber(pwdString)) || (symbols && !containsSymbol(pwdString))) {
-        if (counter == PASSWORD_ITERATIONS) break;
-
-        pwdString = replaceRandomChar(pwdString, allCharacters);
-        pwdString = replaceRandomChar(pwdString, allCharacters.toUpperCase());
-        pwdString = replaceRandomChar(pwdString, allNumbers);
-        pwdString = replaceRandomChar(pwdString, allSymbols);
-
-        counter++;
-    }
-
-    return pwdString;
+    passwordContainerElement.append(element);
 };
 
+const renderSliderFillPercent = function (fillPercent) {
+    sliderElement.style.setProperty('--fill-percent', `${fillPercent}%`);
+};
+
+//
+// Event handlers
+//
 const handleFormSubmit = function (e) {
     e.preventDefault();
 
@@ -132,32 +161,29 @@ const handleFormSubmit = function (e) {
     renderPasswordStrength(password);
 };
 
-const handleSlider = function () {
-    const fillPercent = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
-
-    slider.style.setProperty('--fill-percent', `${fillPercent}%`);
-
-    passwordLengthCounter.textContent = slider.value;
+const handleSliderInput = function () {
+    renderSliderFillPercent(calcSliderFillPercent(sliderElement));
+    passwordLengthCounterElement.textContent = sliderElement.value;
 };
 
-const handleCopy = function () {
+const handleCopyPasswordClick = function () {
+    if (!passwordOutputElement.value.trim()) return console.error('No password to copy!');
+
     navigator.clipboard.writeText(passwordOutputElement.value);
 
-    passwordContainerElement.querySelector('.password-generator__copied-text')?.remove();
-
-    const element = document.createElement('p');
-    element.classList.add('password-generator__copied-text');
-    element.textContent = 'Copied';
-
-    element.addEventListener('animationend', e => e.target.remove());
-
-    passwordContainerElement.append(element);
+    renderCopyNotification();
 
     this.blur();
 };
 
-slider.addEventListener('input', handleSlider);
+//
+// Events
+//
+sliderElement.addEventListener('input', handleSliderInput);
 passwordFormElement.addEventListener('submit', handleFormSubmit);
-copyPasswordElement.addEventListener('click', handleCopy);
+copyPasswordElement.addEventListener('click', handleCopyPasswordClick);
 
-handleSlider();
+//
+// Initial setup
+//
+renderSliderFillPercent(calcSliderFillPercent(sliderElement));
